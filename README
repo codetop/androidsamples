@@ -1,0 +1,12 @@
+Todo App
+===============
+
+Todo app is a sample todo app. 
+This app allows the user to :
+1. Create ian item.
+2. Delete an item (long click on the item).
+3. Edit an item (click on the item).
+
+The app also stores the items in a file for persistence between app restarts. 
+
+
