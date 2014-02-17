@@ -1,4 +1,0 @@
-androidsamples
-==============
-
-Sample Android Programs
