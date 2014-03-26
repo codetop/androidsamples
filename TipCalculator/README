@@ -1,0 +1,14 @@
+Tip Calculator -
+
+Basic tip calclator. 
+
+1. Calculates tips for 15% , 20%, 25%
+2. Uses radio buttons. 
+3. Auto updates tip amount when check amount is updated (Enter pressed) 
+
+Limitations -
+
+1. Does not validate the text . Will throw errors if you enter invalid amount (does not check for alphabets, negative numbers invalid characters)
+2. Ideally the tip amount should be recalculated as the check amount is being typed. It does so on Enter pressed. 
+
+

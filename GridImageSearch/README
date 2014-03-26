@@ -1,0 +1,15 @@
+Basic GridImageSearch
+
+Following features are supported -
+
+1. Search for images using google api.
+2. Load on scroll/pagination.
+3. Filter based on settings.
+
+Following are not yet supported - 
+
+1. Error handling. 
+2. Image sharing.
+3. Action bar search item. 
+
+
