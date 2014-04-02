@@ -11,8 +11,12 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -23,8 +27,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class SearchActivity extends Activity {
 	
 	
@@ -74,8 +80,23 @@ public class SearchActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.search, menu);
-		//getMenuInflater().inflate(R.menu.options_menu,menu);
-		return true;
+		/*getMenuInflater().inflate(R.menu.options_menu,menu);
+		// Get the SearchView and set the searchable configuration
+	    SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+	    SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+	    // Assumes current activity is the searchable activity
+	    searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+	    searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+		
+	    // Get the intent, verify the action and get the query
+	    Intent intent = getIntent();
+	    if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+	      String query = intent.getStringExtra(SearchManager.QUERY);
+	      etQuery.setText(query);
+	      loadImages(0);
+	    }*/
+	    
+	    return true;
 	}
 
 	public void onSettingsPress(MenuItem mi) {
@@ -105,6 +126,12 @@ public class SearchActivity extends Activity {
 		
 	}
 	
+
+	public void onImageSearch(MenuItem mi) {
+		
+		imageResults.clear(); 
+		loadImages(0);
+	}
 	private void loadImages(int page) { 
 		
 		String query = etQuery.getText().toString();

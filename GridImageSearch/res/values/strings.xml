@@ -15,6 +15,7 @@
     <string name="label_save">Save</string>
     <string name="hint_enter_site_url">Enter Site URL</string>
     <string name="search_title">Search Images</string>
+    <string name="search_hint">Search Images</string>
     
 
     <string-array name="image_sizes">

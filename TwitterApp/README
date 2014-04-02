@@ -1,0 +1,13 @@
+Basic TwitterApp	
+
+This app has the following functionality-
+
+User can sign in using OAuth login flow
+User can view last 25 tweets from their home timeline (includes profile image, body, timestamp)
+User can compose a new tweet to post
+After posting tweet, user should be taken back to timeline with the tweet visible
+User can load more tweets once they reach the bottom of the list (endless scroll)
+
+The application also handles errors from the http client libraries. However not all errors are being passed on to the app by the framework- this needs to be fixed. 
+
+
