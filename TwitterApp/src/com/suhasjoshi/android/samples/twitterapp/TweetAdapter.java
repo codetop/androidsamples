@@ -10,6 +10,7 @@ import android.text.Html;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 public class TweetAdapter extends ArrayAdapter<Tweet> {
 
+	private TweetImageClickListener tweetImageClickListener = null;
 	public TweetAdapter(Context context, 
 			List<Tweet> tweets) {
 		super(context,0, tweets);
@@ -43,6 +45,18 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 				formattedTime + "</bold></font></small>";
 		nameView.setText(Html.fromHtml(formattedName));
 		
+		imageView.setTag(tweet.getUser().getScreenName());
+		imageView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View imageView) {
+				if(tweetImageClickListener !=null) {
+					tweetImageClickListener.imageClicked(imageView.getTag().toString());
+				}
+
+			}
+			
+		});
 		TextView bodyView = (TextView) view.findViewById(R.id.tvBody);
 		bodyView.setText(Html.fromHtml(tweet.getBody()));
 		
@@ -56,5 +70,10 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
 				DateUtils.MINUTE_IN_MILLIS, 
 				DateUtils.FORMAT_NO_NOON).toString();	
 		
+	}
+	
+	public void addImageClickListener(TweetImageClickListener imageClickListner) { 
+		
+		this.tweetImageClickListener = imageClickListner;
 	}
 }

@@ -30,7 +30,7 @@ public class LoginActivity extends OAuthLoginActivity<TwitterClient> {
     @Override
     public void onLoginSuccess() {
     	 
-    	TwitterClientApp.getClient().verifyCredentials(new JsonHttpResponseHandler() {
+    	TwitterClientApp.getClient().verifyCredentials(null,new JsonHttpResponseHandler() {
 
     		@Override
     		public void onSuccess(int arg0, JSONObject jsonObject) {

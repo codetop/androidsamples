@@ -13,7 +13,6 @@ import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.suhasjoshi.android.samples.twitterapp.models.User;
 
 /*
  * 
@@ -36,10 +35,22 @@ public class TwitterClient extends OAuthBaseClient {
     public static final String REST_CALLBACK_URL = "oauth://twitterapp"; // Change this (here and in manifest)
     
     //Home Timeline 
-    public static final String URL_HOME_TIMELINE = "statuses/home_timeline.json";
+    public static final String URL_HOME_TIMELINE = "statuses/home_timeline.json";    
+    //Mentions Timeline 
+    public static final String URL_MENTIONS_TIMELINE = "statuses/mentions_timeline.json";
+    //User Timeline 
+    public static final String URL_USER_TIMELINE = "statuses/user_timeline.json";
+    
+    //User lookup
+    public static final String URL_USER_LOOKUP = "users/lookup.json";
+    
+    //Common parameters for timelines.
     public static final String REQ_PARAM_MAX_ID = "max_id";    
     public static final String REQ_PARAM_COUNT = "count";
     public static final int VALUE_COUNT= 50;
+
+
+    
     
     //Tweet post
     public static final String URL_POST_STATUS_UPDATE = "statuses/update.json";
@@ -47,28 +58,31 @@ public class TwitterClient extends OAuthBaseClient {
     
     //Verify Credentials 
     public static final String URL_VERIFY_CREDENTIALS = "account/verify_credentials.json";
+	private static final String REQ_PARAM_SCREEN_NAME = "screen_name";
     
-    private AsyncHttpResponseHandler handler = null; 
     
     public TwitterClient(Context context) {
         super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
     }
      
-    public void getHomeTimeline(AsyncHttpResponseHandler handler) { 
+    public void getTimeline(String url,String screenName,AsyncHttpResponseHandler handler) { 
     	
-    	this.handler = handler;
-    	loadData(0,VALUE_COUNT);
+    	loadData(url,screenName,0,VALUE_COUNT,handler);
 
     }
     
-    public void loadData(long maxId, int count) {
+
+    public void loadData(String url,String screenName,long maxId, int count, AsyncHttpResponseHandler handler) {
     	
     	RequestParams requestParams = new RequestParams();
     	requestParams.put(REQ_PARAM_COUNT, ""+VALUE_COUNT);
     	if(maxId != 0) {
     		requestParams.put(REQ_PARAM_MAX_ID, ""+maxId);
     	}
-    	client.get(getApiUrl(URL_HOME_TIMELINE), requestParams, handler);  
+    	if(screenName !=null) {
+    		requestParams.put(REQ_PARAM_SCREEN_NAME, screenName);
+    	}
+    	client.get(getApiUrl(url), requestParams, handler);  
     }
     
     public void tweet(String tweetString) { 
@@ -99,11 +113,30 @@ public class TwitterClient extends OAuthBaseClient {
     	}); 
     }
     
-    public void verifyCredentials(AsyncHttpResponseHandler handler) {
-        String apiUrl = getApiUrl(URL_VERIFY_CREDENTIALS);
-        client.get(apiUrl, handler);
-    }
+    public void verifyCredentials(String screenName,AsyncHttpResponseHandler handler) {
+    	
 
+        String apiUrl = getApiUrl(URL_VERIFY_CREDENTIALS);
+        RequestParams requestParams = null;
+        if(screenName !=null) {
+        	requestParams = new RequestParams();
+        	requestParams.put("screen_name", screenName);
+        }
+        client.get(apiUrl, requestParams,handler);
+       
+
+    }
+    
+    public void getUserInfo(String screenName,AsyncHttpResponseHandler handler) {
+    	
+        String apiUrl = getApiUrl("users/lookup.json");
+        RequestParams requestParams = null;
+        if(screenName !=null) {
+        	requestParams = new RequestParams();
+        	requestParams.put("screen_name", screenName);
+        }
+        client.get(apiUrl,requestParams,handler);
+    }
 
      
     /* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint

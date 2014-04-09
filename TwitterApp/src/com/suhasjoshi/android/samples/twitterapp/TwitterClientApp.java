@@ -2,6 +2,7 @@ package com.suhasjoshi.android.samples.twitterapp;
 
 import android.content.Context;
 
+import com.codepath.oauth.OAuthBaseClient;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -34,7 +35,7 @@ public class TwitterClientApp extends com.activeandroid.app.Application {
     }
     
     public static TwitterClient getClient() {
-    	return (TwitterClient) TwitterClient.getInstance(TwitterClient.class, TwitterClientApp.context);
+    	return (TwitterClient) OAuthBaseClient.getInstance(TwitterClient.class, TwitterClientApp.context);
     }
     
 	public static User getUserCredentials() {
@@ -44,5 +45,7 @@ public class TwitterClientApp extends com.activeandroid.app.Application {
 	public static void setUserCredentials(User userCredentials) {
 		TwitterClientApp.userCredentials = userCredentials;
 	}
+
+
 
 }

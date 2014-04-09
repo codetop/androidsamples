@@ -1,4 +1,4 @@
-Basic TwitterApp	
+Basic TwitterApp with Fragments	
 
 This app has the following functionality-
 
@@ -8,6 +8,9 @@ User can compose a new tweet to post
 After posting tweet, user should be taken back to timeline with the tweet visible
 User can load more tweets once they reach the bottom of the list (endless scroll)
 
-The application also handles errors from the http client libraries. However not all errors are being passed on to the app by the framework- this needs to be fixed. 
+User can switch between Timeline and Mention views using tabs.
+User can click icon on Action Bar to view their own profile.
+User can click on the profile image in any tweet to see that user's profile.
+
 
 

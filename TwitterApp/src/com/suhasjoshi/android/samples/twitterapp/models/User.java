@@ -17,6 +17,7 @@ public class User extends BaseModel implements Serializable {
 	private int numTweets;
 	private int followersCount;
 	private int friendsCount;
+	private String tagLine;
 
 	public User(JSONObject jsonObject) {
 		super(jsonObject);
@@ -53,7 +54,9 @@ public class User extends BaseModel implements Serializable {
 		return profileImageUrl;
 	}
 
-
+	public String getTagLine() {
+		return tagLine;
+	}
     public static User fromJson(JSONObject json) {
         User u = new User(json);
     	u.name = u.getString("name");
@@ -64,9 +67,12 @@ public class User extends BaseModel implements Serializable {
     	u.followersCount = u.getInt("followers_count");
     	u.friendsCount = u.getInt("friends_count");
     	u.profileImageUrl = u.getString("profile_image_url");
+    	u.tagLine = u.getString("description");
 
         return u;
     }
+
+
 
 
 }

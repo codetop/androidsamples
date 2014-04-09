@@ -14,6 +14,13 @@
         android:onClick="onComposePress"
         android:title="@string/tweet">
     </item>
+    <item
+        android:id="@+id/miProfile"
+        android:icon="@drawable/ic_action_profile"
+        android:showAsAction="always"
+        android:onClick="onProfilePress"
+        android:title="@string/profile">
+    </item>
     
 
 </menu>
